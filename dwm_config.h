@@ -1,0 +1,1 @@
+/home/peru/Git/dwm/config.h

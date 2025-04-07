@@ -1,0 +1,1 @@
+/home/peru/Git/dmenu/config.h

@@ -1,0 +1,1 @@
+/home/peru/.config/nvim/init.vim

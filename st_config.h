@@ -1,0 +1,1 @@
+/home/peru/Git/st/config.h
