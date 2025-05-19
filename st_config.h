@@ -36,6 +36,8 @@ static float chscale = 1.0;
  */
 wchar_t *worddelimiters = L" ";
 
+float alpha = 0.8;
+
 /* selection timeouts (in milliseconds) */
 static unsigned int doubleclicktimeout = 300;
 static unsigned int tripleclicktimeout = 600;

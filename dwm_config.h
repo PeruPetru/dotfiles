@@ -12,7 +12,7 @@ static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_orange[]      = "#bba000";
+static const char col_green[]      = "#008000";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -28,8 +28,9 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "firefox",  NULL,       NULL,       1 << 0,       0,           -1 }, 
+    { "Steam",    NULL,       NULL,       1 << 4,       0,           -1 },
+    { "discord",  NULL,       NULL,       1 << 1,       0,           -1 },
 };
 
 /* layout(s) */
@@ -40,7 +41,8 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
+    { "|M|",      centeredmaster },
+	{ "[]=",      tile }    /* first entry is default */
 };
 
 /* key definitions */
@@ -57,10 +59,12 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_orange, "-sf", col_gray4, NULL };
-//static const char *bluetoothcmd[] = { "dmenu_bluetooth", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_orange, "-sf", col_gray4, NULL };
-static const char *qalccmd[] = { "dmenu_run", "-C", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_orange, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_green, "-sf", col_gray4, NULL };
+static const char *bluetoothcmd[] = { "dmenu-bluetooth", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_green, "-sf", col_gray4, NULL };
+static const char *networkmanagercmd[] = { "networkmanager_dmenu", NULL };
+static const char *qalccmd[] = { "dmenu_run", "-C", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_green, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
+static const char *savereplaycmd[]  = { "save_replay", NULL };
 static const char *flameshotcmd[] = {"flameshot", "gui", NULL};
 static const char *rofimojicmd[] = {"rofimoji", "--skin-tone", "neutral", NULL};
 
@@ -90,9 +94,11 @@ static const Key keys[] = {
     { 0,                     XF86XK_AudioMute, spawn,          {.v = mutevol } },
 	{ MODKEY,                       XK_period, spawn,          {.v = rofimojicmd } },
 	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
-//	{ MODKEY,                       XK_b,      spawn,          {.v = bluetoothcmd } },
+	{ MODKEY,                       XK_b,      spawn,          {.v = bluetoothcmd } },
+	{ MODKEY,                       XK_n,      spawn,          {.v = networkmanagercmd } },
 	{ MODKEY,                       XK_f,      spawn,          {.v = qalccmd } },
 	{ MODKEY,                       XK_q,      spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_t,      spawn,          {.v = savereplaycmd } },
 	{ MODKEY,                       XK_z,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
